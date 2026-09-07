@@ -50,6 +50,6 @@ public onSubmit() {
         }});
   }
 }
-// get the form short name to access the form fields
+// Convenience accessor for the reactive form's controls
 get f() { return this.addForm.controls; }
 }

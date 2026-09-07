@@ -3,16 +3,10 @@ const Trip = require('../models/travlr'); // Register model
 const Model = mongoose.model('trips');
 
 // Get: /trips - list all the trips
-// Regardless of outcome, response must include HTML status code
-// and JSON message to the requesting client
 const tripsList = async(req, res) => {
     const q = await Model
     .find({}) // No filter, return all records
     .exec();
-
-    // Uncomment the folloing line to show the results of querey
-    // on the console
-    // console.log(q);
 
     if(!q) 
     { // Database returned no data
@@ -28,16 +22,10 @@ const tripsList = async(req, res) => {
 
 
 // Get: /trips/:tripCode - list a single trip
-// Regardless of outcome, response must include HTML status code
-// and JSON message to the requesting client
 const tripsFindByCode = async(req, res) => {
     const q = await Model
     .find({'code' : req.params.tripCode}) // Return a single record
     .exec();
-
-    // Uncomment the folloing line to show the results of querey
-    // on the console
-    // console.log(q);
 
     if(!q) 
     { // Database returned no data
@@ -53,8 +41,6 @@ const tripsFindByCode = async(req, res) => {
 
 
 // POST: /trips - Adds a new Trip
-// Regardless of outcome, response must include HTML status code
-// and JSON message to the requesting client
 const tripsAddTrip = async (req, res) => {
     try {
         // Call getUser to fetch user information
@@ -71,7 +57,7 @@ const tripsAddTrip = async (req, res) => {
             image: req.body.image,
             description: req.body.description,
             // Assuming you want to associate the trip with the user
-            user: user._id  // Replace with the correct user ID field from getUser response
+            user: user._id
         });
 
         // Save the new trip to the database
@@ -89,8 +75,6 @@ const tripsAddTrip = async (req, res) => {
 
 
 // PUT: /trips/:tripCode - Adds a new Trip
-// Regardless of outcome, response must include HTML status code
-// and JSON message to the requesting client
 const tripsUpdateTrip = async (req, res) => {
     getUser(req, res, (req, res) => {
         Trip.findOneAndUpdate(

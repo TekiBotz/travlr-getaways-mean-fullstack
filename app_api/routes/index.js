@@ -2,7 +2,7 @@ const express = require('express'); // Express app
 const router = express.Router(); // Router logic
 const jwt = require('express-jwt');
 const auth = jwt({
-    secrete: process.env.JWT_SECRETE,
+    secret: process.env.JWT_SECRET,
     userProperty: 'payLoad'
 });
 
