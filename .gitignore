@@ -56,6 +56,10 @@ typings/
 
 # dotenv environment variables file
 .env
+!.env.example
+
+# macOS finder metadata
+.DS_Store
 
 # next.js build output
 .next
