@@ -71,3 +71,5 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+# Local-only Claude Code project instructions
+CLAUDE.md
