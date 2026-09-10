@@ -1,9 +1,14 @@
 const express = require('express'); // Express app
 const router = express.Router(); // Router logic
-const jwt = require('express-jwt');
+const { expressjwt: jwt } = require('express-jwt');
+
+// express-jwt 8 attaches the decoded token to req[requestProperty] (default
+// 'auth'). The trips controller's getUser reads req.payload, so name it here.
+// 'userProperty' was the pre-6.x option name and is ignored by this version.
 const auth = jwt({
-    secret: process.env.JWT_SECRET,
-    userProperty: 'payLoad'
+  secret: process.env.JWT_SECRET,
+  algorithms: ['HS256'],
+  requestProperty: 'payload'
 });
 
 // This is where we import the controllers we will route
