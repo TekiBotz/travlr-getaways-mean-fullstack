@@ -8,13 +8,12 @@ import { TripDataService } from '../services/trip-data.service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
     private tripDataService: TripDataService
   ) { }
 
-  public getToken(): string {
+  public getToken(): string | null {
     return this.storage.getItem('travlr-token');
   }
 
@@ -22,18 +21,14 @@ export class AuthenticationService {
     this.storage.setItem('travlr-token', token);
   }
 
-  public login(user: User): Promise<any> {
+  public login(user: User): Promise<void> {
     return this.tripDataService.login(user)
-      .then((authResp: AuthResponse) =>
-        this.saveToken(authResp.token)
-      );
+      .then((authResp: AuthResponse) => this.saveToken(authResp.token));
   }
 
-  public register(user: User): Promise<any> {
+  public register(user: User): Promise<void> {
     return this.tripDataService.register(user)
-      .then((authResp: AuthResponse) =>
-        this.saveToken(authResp.token)
-      );
+      .then((authResp: AuthResponse) => this.saveToken(authResp.token));
   }
 
   public logout(): void {
@@ -41,7 +36,7 @@ export class AuthenticationService {
   }
 
   public isLoggedIn(): boolean {
-    const token: string = this.getToken();
+    const token: string | null = this.getToken();
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.exp > (Date.now() / 1000);
@@ -50,11 +45,14 @@ export class AuthenticationService {
     }
   }
 
-  public getCurrentUser(): User {
+  public getCurrentUser(): User | null {
     if (this.isLoggedIn()) {
-      const token: string = this.getToken();
-      const { email, name } = JSON.parse(atob(token.split('.')[1]));
-      return { email, name } as User;
+      const token: string | null = this.getToken();
+      if (token) {
+        const { email, name } = JSON.parse(atob(token.split('.')[1]));
+        return { email, name } as User;
+      }
     }
+    return null;
   }
 }

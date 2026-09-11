@@ -7,6 +7,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 
+// Register the Mongoose schemas and Passport strategy before requiring the
+// routers. The API controllers call mongoose.model('User') / model('trips') at
+// module load, so the schemas have to be registered first or Mongoose throws
+// MissingSchemaError at boot.
+require('./app_api/models/db');
+require('./app_api/config/passport');
+
 // Define routers
 const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
@@ -14,11 +21,6 @@ const travelRouter = require('./app_server/routes/travel');
 const apiRouter = require('./app_api/routes/index');
 
 const handlebars = require('hbs');
-
-// Bring in the database
-require('./app_api/models/db');
-
-require('./app_api/config/passport');
 
 const app = express();
 

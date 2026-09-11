@@ -64,6 +64,9 @@ process.on('SIGTERM', () => {
 // Make initial connection to DB
 connect();
 
-// Import Mongoose schema
+// Import Mongoose schemas. user must load before anything that calls
+// mongoose.model('User') (passport config, auth controller) or Mongoose
+// throws MissingSchemaError at boot.
+require('./user');
 require('./travlr');
 module.exports = mongoose;
