@@ -12,7 +12,6 @@ what's left — mostly the admin SPA's missing login screen.
 
 ## Contents
 
-- [Screenshots](#screenshots)
 - [Tech stack](#tech-stack)
 - [Repository layout](#repository-layout)
 - [How the three tiers fit together](#how-the-three-tiers-fit-together)
@@ -22,12 +21,6 @@ what's left — mostly the admin SPA's missing login screen.
 - [Environment variables](#environment-variables)
 - [Known issues](#known-issues)
 - [License](#license)
-
-## Screenshots
-
-<!-- Add screenshots of the /travel SSR page and the Angular admin trip list here. -->
-
-_TODO: drop in screenshots of the public travel page and the admin trip list._
 
 ## Tech stack
 
