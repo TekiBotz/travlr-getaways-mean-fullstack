@@ -51,7 +51,3 @@ npm start # :3000
   markup in `public/`.
 - `npm audit`: 13 backend, 89 in the Angular toolchain. Clearing the Angular ones
   means a major version bump.
-
-## License
-
-MIT
